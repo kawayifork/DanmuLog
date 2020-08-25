@@ -31,12 +31,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BilibiliDM_PluginFramework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Desktop\sdk(1)\BilibiliDM_PluginFramework.dll</HintPath>
+    <Reference Include="BilibiliDM_PluginFramework">
+      <HintPath>..\..\..\..\..\Desktop\sdk(1)\BilibiliDM_PluginFramework.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\Desktop\sdk(1)\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\..\..\Desktop\sdk(1)\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />

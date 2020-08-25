@@ -25,10 +25,10 @@ namespace DanmuLog
             {
                 Type Settings = this.GetType();
                 object Config = JsonConvert.DeserializeObject(File.ReadAllText(ConfigPath),Settings);
-               foreach(PropertyInfo prop in Settings.GetProperties())
-               {
+                foreach (PropertyInfo prop in Settings.GetProperties())
+                {
                     prop.SetValue(this, prop.GetValue(Config));
-               }   
+                }
             }
         }
         private bool enabled;

@@ -35,10 +35,7 @@ namespace DanmuLog
                 Log(e.ToString());
                 Log("载入配置文件失败，请重新设置配置。");
             }
-            if ( this.Status)
-            {
-            }
-            if (Settings.Enabled == true)
+            if (Settings.Enabled)
             {
                 this.Start();
             }
@@ -78,7 +75,7 @@ namespace DanmuLog
                     }
                 case MsgTypeEnum.Comment:
                     {
-                        if (Settings.DanmuLog == true)
+                        if (Settings.DanmuLog)
                         {
                             Info = "【弹幕】" + DateTime.Now.ToString("HH:mm:ss.fff") + " : " + e.Danmaku.UserName + " 说：" + e.Danmaku.CommentText;
                             Output("Log", Info, Roomid);
@@ -92,7 +89,7 @@ namespace DanmuLog
                     }
                 case MsgTypeEnum.SuperChat:
                     {
-                        if (Settings.DanmuLog == true)
+                        if (Settings.DanmuLog)
                         {
                             Info = "【留言】" + DateTime.Now.ToString("HH:mm:ss.fff") + " : " + e.Danmaku.UserName + " 说：" + e.Danmaku.CommentText;
                             Output("Log", Info, Roomid);
@@ -109,7 +106,7 @@ namespace DanmuLog
 
         private void Class1_Disconnected(object sender, DisconnectEvtArgs e)
         {
-            if (Settings.Enabled == true)
+            if (Settings.Enabled)
             {
                 AddDM("直播间已断开", false);
                 Log("直播间已断开");
@@ -118,8 +115,10 @@ namespace DanmuLog
 
         private void Class1_Connected(object sender, ConnectedEvtArgs e)
         {
-            if (Settings.Enabled == true)
+            if (Settings.Enabled)
             {
+                AddDM(RoomId.ToString() + "直播间已连接", false);
+                Log(RoomId.ToString() + "直播间已连接");
                 ShowMessage();
             }
         }
@@ -169,9 +168,8 @@ namespace DanmuLog
         public void ShowMessage()
         {
             string FileName = RoomId.ToString() + "-" + DateTime.Now.ToString("yyyyMMdd") + ".txt";
-            AddDM(RoomId.ToString() + "直播间已连接", false);
-            Log(RoomId.ToString() + "直播间已连接");
-            if (Settings.DanmuLog == true)
+            
+            if (Settings.DanmuLog)
             {
                 OutFile("Log", FileName);
             }
@@ -199,7 +197,7 @@ namespace DanmuLog
             Settings.Enabled = false;
             Console.WriteLine("Plugin Stoped!");
             this.Log("插件已停用");
-            this.AddDM("插件已停用", true);
+            this.AddDM("插件已停用", false);
         }
 
         public override void Start()
@@ -209,9 +207,11 @@ namespace DanmuLog
             Settings.Enabled = true;
             Console.WriteLine("Plugin Started!");
             this.Log("插件已启用");
-            this.AddDM("插件已启用", true);
+            this.AddDM("插件已启用", false);
             if (RoomId != null)
             {
+                AddDM(RoomId.ToString() + "直播间已连接", false);
+                Log(RoomId.ToString() + "直播间已连接");
                 ShowMessage();
             }
         }
